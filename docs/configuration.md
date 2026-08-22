@@ -149,14 +149,14 @@ pages:
     columns:
       - size: full
         widgets:
-          $include: rss.yml
+          - $include: rss.yml
   - name: News
     columns:
       - size: full
         widgets:
           - type: group
             widgets:
-              $include: rss.yml
+              - $include: rss.yml
               - type: reddit
                 subreddit: news
 ```
@@ -195,6 +195,12 @@ icon: si:immich # si for Simple icons https://simpleicons.org/
 icon: sh:immich # sh for selfh.st icons https://selfh.st/icons/
 icon: di:immich # di for Dashboard icons https://github.com/homarr-labs/dashboard-icons
 icon: mdi:camera # mdi for Material Design icons https://pictogrammers.com/library/mdi/
+```
+
+The `sh:` and `di:` prefixes request SVG icons by default. If an icon is only available as a PNG, add the extension to its name:
+
+```yaml
+icon: sh:unmanic.png
 ```
 
 > [!NOTE]
@@ -1879,7 +1885,7 @@ Preview:
 
 To reorder tasks, drag and drop them by grabbing the top side of the task:
 
-![](images/reorder-todo-tasks-prevew.gif)
+![](images/reorder-todo-tasks-preview.gif)
 
 To delete a task, hover over it and click on the trash icon.
 
@@ -2239,7 +2245,9 @@ When set to `true`, automatically converts container names such as `container_na
 ##### `sock-path`
 The path to the Docker socket. This can also be a [remote socket](https://docs.docker.com/engine/daemon/remote-access/) or proxied socket using something like [docker-socket-proxy](https://github.com/Tecnativa/docker-socket-proxy).
 
-###### `category`
+If the socket path starts with `tcp://` or `http://`, it will be treated as a remote socket. Anything else will be treated as a path to a Unix socket.
+
+##### `category`
 Filter to only the containers which have this category specified via the `glance.category` label. Useful if you want to have multiple containers widgets, each showing a different set of containers.
 
 <details>
